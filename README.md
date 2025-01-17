@@ -29,7 +29,7 @@ The following environment var can be set for some special situation:
 - Nightly version is available as Github Actions artifacts
 
 ## TODO / Special Features
-- [ ] Fix my fork of darling-corecrypto to support make install
+- [x] Fix my fork of darling-corecrypto to support make install
 - [x] Track upstream (AltServer-Windows) develop branch (i.e. Beta version)
 - [x] Support Offline Anisette Data Generation (i.e. without Sideloadly)
   - Finsihed, please run [alt_anisette_server](https://hub.docker.com/r/nyamisty/alt_anisette_server) & use `ALTSERVER_ANISETTE_SERVER` to specify custom server URL
@@ -47,12 +47,16 @@ The following environment var can be set for some special situation:
   		- Either install yourself or run
   			$ sudo curl -sSL https://get.docker.com | sh
   		- If you get an error google "How to install docker **YOUR OPERATING SYSTEM and VERSION**
+  	2. Need to Know
+  		- In the instructions, // is used as a comment and should NOT be executed.
+  		- The character # is the linux prompt character and should NOT be executed.
+  		- Questions? Create an issue!
   ```
 - Build  
   ```
     1. Run alpine docker (change --platform to corresponding architecture you want): 
         docker run --platform=linux/arm/v6 --name altserver-builder-alpine -it alpine:3.15
-  	-- Everything from now on unless specified is inside this Docker container.
+  	// Everything from now on unless specified is inside this Docker container.
     2. Install dependencies:
   	# cd
   	# apk add zsh git curl wget g++ clang boost-static ninja boost-dev cmake make sudo bash nano libressl-dev util-linux-dev zlib-dev zlib-static python3
@@ -64,27 +68,34 @@ The following environment var can be set for some special situation:
   	# cmake ..
   	# make
   	# make install
+  	# cd ~
     4. Install cpprestsdk
+  	# git config --global core.compression 9
   	# git clone --recursive https://github.com/microsoft/cpprestsdk
-	# cd cpprestsdk
+  	# cd cpprestsdk
   	# mkdir build
   	# cmake -DBUILD_SHARED_LIBS=OFF ..
-  	--Skip this if you arent compiling for armv6/armhf or armv7
+  	// This gets rid of some compiler options that prevent compiling on older ARM (I think)
+  	// Skip this if you arent compiling for armv6/armhf or armv7
   	# find . -type f -exec grep -l " -Wcast-align" {} \; | xargs sed -i 's/ -Wcast-align//g'
   	# make
   	# make install
+  	# cd ~
     5. Install libzip
-        # git clone https://github.com/nih-at/libzip
+  	# git clone https://github.com/nih-at/libzip
   	# cd libzip
   	# mkdir build
   	# cd build
   	# cmake -DBUILD_SHARED_LIBS=OFF ..
   	# make
   	# make install
-    6. Compile AltServer-Linux
-        # git clone --recursive https://github.com/NyaMisty/AltServer-Linux
-        # cd AltServer-Linux
-	# mkdir build
-	# cd build
-        # make -f ../Makefile -j
+  	# cd ~
+    6. Clean Up Installs
+  	# rm -rf corecrypto cpprestsdk libzip
+    7. Compile AltServer-Linux
+  	# git clone --recursive https://github.com/NyaMisty/AltServer-Linux
+  	# cd AltServer-Linux
+  	# mkdir build
+  	# cd build
+  	# make -f ../Makefile -j
   ```
