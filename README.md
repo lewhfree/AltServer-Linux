@@ -55,19 +55,15 @@ The following environment var can be set for some special situation:
   	-- Everything from now on unless specified is inside this Docker container.
     2. Install dependencies:
   	# cd
-  	# apk add zsh git curl wget g++ clang boost-static ninja boost-dev cmake make sudo bash nano libressl-dev util-linux-dev zlib-dev zlib-static python3 py3-pip py3-cryptography
+  	# apk add zsh git curl wget g++ clang boost-static ninja boost-dev cmake make sudo bash nano libressl-dev util-linux-dev zlib-dev zlib-static python3
     3. Install corecrypto
-  	-- Using lewhfree fix of the darling implementation of corecrypto because it plays better with my compiler and cmake (and it uses GNU GPLv3)
-  	# git clone --recursive https://github.com/lewhfree/corecrypto
+  	# git clone https://github.com/lewhfree/corecrypto
   	# cd corecrypto
   	# mkdir build
   	# cd build
-  	# CC=clang
-  	# CXX=clang++
-  	# cmake -DENABLE_TESTS=ON ..
+  	# cmake ..
   	# make
-  	--Dont do this command.
-  	# cp libcorecrypto.so /usr/lib
+  	# make install
     4. Install cpprestsdk
   	# git clone --recursive https://github.com/microsoft/cpprestsdk
 	# cd cpprestsdk
