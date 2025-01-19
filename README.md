@@ -23,13 +23,7 @@ The following environment var can be set for some special situation:
   - ALTSERVER_NO_SUBSCRIBE: (*unused*) Please enable this for usbmuxd server that do not correctly usbmuxd_listen interfaces
 ```
 
-## Download
-
-- Precompiled static binary can be downloaded in Release ( also have a look at pre-release ;) )
-- Nightly version is available as Github Actions artifacts
-
 ## TODO / Special Features
-- [x] Fix my fork of darling-corecrypto to support make install
 - [x] Track upstream (AltServer-Windows) develop branch (i.e. Beta version)
 - [x] Support Offline Anisette Data Generation (i.e. without Sideloadly)
   - Finsihed, please run [alt_anisette_server](https://hub.docker.com/r/nyamisty/alt_anisette_server) & use `ALTSERVER_ANISETTE_SERVER` to specify custom server URL
@@ -40,26 +34,21 @@ The following environment var can be set for some special situation:
 
 ----
 
-## Advanced: Build Instruction
+## Build Instruction
 - Prerequisites / Before you Build
   ```
 	1. Docker installed and set up
   		- Either install yourself or run
   			$ sudo curl -sSL https://get.docker.com | sh
   		- If you get an error google "How to install docker **YOUR OPERATING SYSTEM and VERSION**
-  	2. Need to Know
-  		- In the instructions, // is used as a comment and should NOT be executed.
-  		- The character # is the linux prompt character and should NOT be executed.
-  		- Questions? Create an issue!
   ```
 - Build  
   ```
     1. Run alpine docker (change --platform to corresponding architecture you want): 
-        docker run --name altserver-builder-alpine -it alpine:3.20
-  	// Everything from now on unless specified is inside this Docker container.
+        docker run -it alpine
     2. Install dependencies:
   	# cd
-  	# apk add zsh git curl wget g++ clang boost-static ninja boost-dev cmake make sudo bash nano libressl-dev util-linux-dev zlib-dev zlib-static python3 cpprestsdk-dev
+  	# apk add git g++ clang cmake make openssl-dev util-linux-dev cpprestsdk-dev libzip-dev
     3. Install corecrypto
   	# git clone https://github.com/lewhfree/corecrypto
   	# cd corecrypto
@@ -69,21 +58,11 @@ The following environment var can be set for some special situation:
   	# make
   	# make install
   	# cd ~
-    4. Install libzip
-  	# git clone https://github.com/nih-at/libzip
-  	# cd libzip
+  	# rm -rf corecrypto
+    4. Compile AltServer-Linux
+  	# git clone --recursive https://github.com/lewhfree/AltServer-Linux altserver
+  	# cd altserver
   	# mkdir build
   	# cd build
-  	# cmake -DBUILD_SHARED_LIBS=OFF ..
-  	# make
-  	# make install
-  	# cd ~
-    5. Clean Up Installs
-  	# rm -rf corecrypto cpprestsdk libzip
-    6. Compile AltServer-Linux
-  	# git clone --recursive https://github.com/NyaMisty/AltServer-Linux
-  	# cd AltServer-Linux
-  	# mkdir build
-  	# cd build
-  	# make -f ../Makefile -j
+  	# make -f ../Makefile
   ```
