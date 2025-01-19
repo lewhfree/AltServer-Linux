@@ -55,11 +55,11 @@ The following environment var can be set for some special situation:
 - Build  
   ```
     1. Run alpine docker (change --platform to corresponding architecture you want): 
-        docker run --platform=linux/arm/v6 --name altserver-builder-alpine -it alpine:3.15
+        docker run --name altserver-builder-alpine -it alpine:3.20
   	// Everything from now on unless specified is inside this Docker container.
     2. Install dependencies:
   	# cd
-  	# apk add zsh git curl wget g++ clang boost-static ninja boost-dev cmake make sudo bash nano libressl-dev util-linux-dev zlib-dev zlib-static python3
+  	# apk add zsh git curl wget g++ clang boost-static ninja boost-dev cmake make sudo bash nano libressl-dev util-linux-dev zlib-dev zlib-static python3 cpprestsdk-dev
     3. Install corecrypto
   	# git clone https://github.com/lewhfree/corecrypto
   	# cd corecrypto
@@ -69,19 +69,7 @@ The following environment var can be set for some special situation:
   	# make
   	# make install
   	# cd ~
-    4. Install cpprestsdk
-  	# git config --global core.compression 9
-  	# git clone --recursive https://github.com/microsoft/cpprestsdk
-  	# cd cpprestsdk
-  	# mkdir build
-  	# cmake -DBUILD_SHARED_LIBS=OFF ..
-  	// This gets rid of some compiler options that prevent compiling on older ARM (I think)
-  	// Skip this if you arent compiling for armv6/armhf or armv7
-  	# find . -type f -exec grep -l " -Wcast-align" {} \; | xargs sed -i 's/ -Wcast-align//g'
-  	# make
-  	# make install
-  	# cd ~
-    5. Install libzip
+    4. Install libzip
   	# git clone https://github.com/nih-at/libzip
   	# cd libzip
   	# mkdir build
@@ -90,9 +78,9 @@ The following environment var can be set for some special situation:
   	# make
   	# make install
   	# cd ~
-    6. Clean Up Installs
+    5. Clean Up Installs
   	# rm -rf corecrypto cpprestsdk libzip
-    7. Compile AltServer-Linux
+    6. Compile AltServer-Linux
   	# git clone --recursive https://github.com/NyaMisty/AltServer-Linux
   	# cd AltServer-Linux
   	# mkdir build
