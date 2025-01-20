@@ -48,7 +48,7 @@ The following environment var can be set for some special situation:
         docker run -it alpine
     2. Install dependencies:
   	# cd
-  	# apk add git g++ clang cmake make openssl-dev util-linux-dev cpprestsdk-dev libzip-dev boost-static boost-dev
+  	# apk add git g++ clang cmake make openssl-dev util-linux-dev cpprestsdk-dev libzip-dev boost-static boost-dev python3
     3. Install corecrypto
   	# git clone https://github.com/lewhfree/corecrypto
   	# cd corecrypto
