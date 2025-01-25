@@ -1,8 +1,9 @@
 # AltServer-Linux
 AltServer for AltStore, but on-device
 
-lewhfree version of this is built so that people using armv6/armv6hf (rpi zero / zero w) can build and run altserver-linux
+lewhfree version of this is built so that people using armv6 (rpi zero / zero w) can build and run altserver-linux
 
+There are no precompiled releases of this version, so you MUST compile it yourself.
 ## Usage
 
 - Install IPA: `./AltServer -u [UDID] -a [AppleID account] -p [AppleID password] [ipaPath.ipa]`
